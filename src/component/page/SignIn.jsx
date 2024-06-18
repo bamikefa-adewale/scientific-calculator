@@ -56,7 +56,7 @@ const SignIn = () => {
 
   return (
     <>
-      <div onClick={handleOpen}>Sign In</div>
+      <div onClick={handleOpen}>Login</div>
       <Dialog
         size="xs"
         open={open}
@@ -70,10 +70,10 @@ const SignIn = () => {
             className="rounded-md shadow-md p-6"
           >
             <Typography variant="h4" className="text-[#ff6600]">
-              Sign Up
+              Login
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              Nice to meet you! Enter your details to register.
+              Nice to meet you! Enter your details to Login.
             </Typography>
             <form
               className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -165,7 +165,7 @@ const SignIn = () => {
                 className="mt-6 bg-deep-orange-800 hover:bg-gray-700"
                 fullWidth
               >
-                Sign Up
+                Login
               </Button>
               <Typography
                 color="gray"

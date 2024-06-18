@@ -12,11 +12,10 @@ export function CarouselWithContent() {
     >
       <div className="relative ">
         <img
-          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-          alt="image 1"
-          className=" object-cover"
+          src="https://res.cloudinary.com/dbrub0d6r/image/upload/v1718720292/photo-1523050854058-8df90110c9f1_uvdpzy.avif"
+          alt="image 2"
+          className="h-full w-full object-cover"
         />
-
         <div className="absolute inset-0 grid h-[100%] w-full place-items-center bg-black/75">
           <div className="w-3/4 text-center md:w-2/4">
             <Typography
@@ -47,10 +46,10 @@ export function CarouselWithContent() {
       </div>
       <div className="relative ">
         <img
-          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          src="https://res.cloudinary.com/dbrub0d6r/image/upload/v1718720689/photo-1528901166007-3784c7dd3653_khysya.avif"
+          alt="image 1"
           className="h-full w-full object-cover"
         />
-
         <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75">
           <div className="w-3/4 text-center md:w-2/4">
             <Typography
@@ -81,7 +80,7 @@ export function CarouselWithContent() {
       </div>
       <div className="relative ">
         <img
-          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          src="https://res.cloudinary.com/dbrub0d6r/image/upload/v1718701225/photo-1588072432836-e10032774350_azpz02.avif"
           alt="image 3"
           className="h-full w-full object-cover"
         />
