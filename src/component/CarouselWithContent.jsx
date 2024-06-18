@@ -80,7 +80,7 @@ export function CarouselWithContent() {
       </div>
       <div className="relative ">
         <img
-          src="https://res.cloudinary.com/dbrub0d6r/image/upload/v1718701225/photo-1588072432836-e10032774350_azpz02.avif"
+          src="https://res.cloudinary.com/dbrub0d6r/image/upload/v1718721690/photo-1625225233840-695456021cde_qzskcs.avif"
           alt="image 3"
           className="h-full w-full object-cover"
         />
