@@ -1,0 +1,23 @@
+.function-pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  padding-top: 8px;
+}
+
+.function-pad button {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #ff9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.function-pad button:hover {
+  background-color: #ddd;
+}
+
+.function-pad button:active {
+  background-color: #90d0ff;
+}
