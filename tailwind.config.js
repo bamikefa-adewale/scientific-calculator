@@ -10,10 +10,6 @@ module.exports = withMT({
     " flowbite.content()",
   ],
 
-  // content: [
-  //   // ...
-  //   flowbite.content(),
-  // ],
   theme: {
     extend: {},
   },

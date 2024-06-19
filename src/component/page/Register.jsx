@@ -25,6 +25,7 @@ const Register = () => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState(defaultValue);
   const [formError, setFormError] = useState({});
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -62,6 +63,7 @@ const Register = () => {
 
     if (Object.keys(errors).length === 0) {
       console.log("Form Data Submitted:", formData);
+      localStorage.setItem("usersDetals", JSON.stringify(formData));
       // Add your form submission logic here
       navigate("/Calculator");
     }

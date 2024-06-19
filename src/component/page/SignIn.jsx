@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Button,
@@ -11,17 +11,28 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 import Register from "./Register";
+
+const defaultValue = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  matricNumber: "",
+  agreedToTerms: false,
+};
 const SignIn = () => {
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState({});
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    agreedToTerms: false,
-  });
+  const [formData, setFormData] = useState(defaultValue);
+  const [userDetails, setUserDetails] = useState(null);
+  console.log(userDetails);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const storedUserDetails = localStorage.getItem("userDetails");
+    if (storedUserDetails) {
+      setUserDetails(JSON.parse(storedUserDetails));
+    }
+  }, []);
 
   const handleOpen = () => setOpen((cur) => !cur);
   const handleChange = (e) => {
@@ -36,6 +47,8 @@ const SignIn = () => {
     const errors = {};
     if (!formData.name) errors.name = "Name is required";
     if (!formData.email) errors.email = "Email is required";
+    if (!formData.matricNumber)
+      errors.matricNumber = "Matric Number is required";
     if (!formData.password) errors.password = "Password is required";
     if (!formData.agreedToTerms)
       errors.agreedToTerms = "You must agree to the terms";
@@ -49,6 +62,7 @@ const SignIn = () => {
 
     if (Object.keys(errors).length === 0) {
       console.log("Form Data Submitted:", formData);
+      localStorage.setItem("usersDetals", JSON.stringify(formData));
       // Add your form submission logic here
       navigate("/Calculator");
     }
@@ -56,7 +70,24 @@ const SignIn = () => {
 
   return (
     <>
-      <div onClick={handleOpen}>Login</div>
+      {userDetails ? (
+        <div>
+          <Typography variant="h4">
+            Welcome back, {userDetails.name}!
+          </Typography>
+          <Button
+            onClick={() => {
+              localStorage.removeItem("userDetails");
+              setUserDetails(null);
+            }}
+          >
+            Logout
+          </Button>
+        </div>
+      ) : (
+        <div onClick={handleOpen}>Login</div>
+      )}
+
       <Dialog
         size="xs"
         open={open}
@@ -112,6 +143,24 @@ const SignIn = () => {
                 {formError.email && (
                   <Typography color="red" className="text-sm">
                     {formError.email}
+                  </Typography>
+                )}
+                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                  Matric Number
+                </Typography>
+                <Input
+                  name="matricNumber"
+                  type="matricNumber"
+                  value={formData.matricNumber}
+                  onChange={handleChange}
+                  size="lg"
+                  placeholder="Enter Your Matric Number"
+                  className="!border-blue-gray-100 focus:!border-deep-orange-800"
+                  error={formData.matricNumber}
+                />
+                {formError.matricNumber && (
+                  <Typography color="red" className="text-sm">
+                    {formError.matricNumber}
                   </Typography>
                 )}
                 <Typography variant="h6" color="blue-gray" className="-mb-3">

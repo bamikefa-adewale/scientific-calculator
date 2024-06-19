@@ -8,7 +8,7 @@ export function CarouselWithContent() {
   return (
     <Carousel
       className="w-full"
-      onSlideChange={(index) => console.log("onSlideChange()", index)}
+      onSlideChange={(index) => ("onSlideChange()", index)}
     >
       <div className="relative ">
         <img
