@@ -25,7 +25,7 @@ const CustomButton = ({
       <button onClick={() => handleClick("/")}>/</button>
       <button onClick={() => handleClick("5")}>5</button>
       <button onClick={() => handleClick("6")}>6</button>
-      <button onClick={() => handleClick("X")}>X</button>
+      <button onClick={() => handleClick("*")}>x</button>
       <button onClick={() => handleClick("7")}>7</button>
       <button onClick={() => handleClick("8")}>8</button>
       <button onClick={() => handleClick("-")}>-</button>
