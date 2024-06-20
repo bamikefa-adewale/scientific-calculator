@@ -14,10 +14,10 @@ const FunctionPad = ({
 }) => {
   return (
     <div className="function-pad">
-      <button onClick={calculateLog}>log</button>
-      <button onClick={calculateSin}>sin</button>
-      <button onClick={calculateCos}>cos</button>
-      <button onClick={calculateTan}>tan</button>
+      <button onClick={calculateLog}>Log</button>
+      <button onClick={calculateSin}>Sin</button>
+      <button onClick={calculateCos}>Cos</button>
+      <button onClick={calculateTan}>Tan</button>
       <button onClick={calculateFactorial}>X!</button>
       <button onClick={calculateSquareRoot}>√</button>
       <button onClick={calculatePercentage}>%</button>

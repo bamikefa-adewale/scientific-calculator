@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-unescaped-entities */
 import { Typography, Button } from "@material-tailwind/react";
-import Register from "./page/Register";
+import Register from "./home/Register";
 import { Carousel } from "flowbite-react";
 
 export function CarouselWithContent() {
@@ -98,7 +98,7 @@ export function CarouselWithContent() {
               Using a scientific calculator involves several steps to perform
               various mathematical operations. Here is a brief guide on how to
               use one: 1. Basic Arithmetic 2.Trigonometric Functions
-              <div className="text-2xl">
+              {/* <div className="text-2xl">
                 <h1 className="text-[orange] text-3xl"> Note:</h1>
                 <p>
                   1 : Sine: Enter the number, press the sin button, and then
@@ -112,7 +112,7 @@ export function CarouselWithContent() {
                   3 : Tangent: Enter the number, press the tan button, and then
                   press "="
                 </p>
-              </div>
+              </div> */}
             </div>
             <div className="flex justify-center gap-2 ">
               <Button className="rounded-full p-5  text-white  bg-deep-orange-800 hover:bg-gray-700">

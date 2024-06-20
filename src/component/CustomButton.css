@@ -8,7 +8,7 @@ input[type="text"] {
 }
 .number-pad {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 5px;
 }
 
@@ -16,11 +16,11 @@ input[type="text"] {
   font-size: 18px;
   cursor: pointer;
   padding: 10px;
-  font-size: 16px;
   border: 1px solid #ccc;
   background-color: #eaeaea;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .number-pad button:hover {
