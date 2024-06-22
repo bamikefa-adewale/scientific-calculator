@@ -1,26 +1,29 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CustomButton from "../component/CustomButton";
 import FunctionPad from "../component/FunctionPad";
 import { MdHistory } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import { FaEquals } from "react-icons/fa";
+import AuthConext from "../context/authContext";
+import { HistoryModal } from "../component/HistoryModal";
+import Result from "postcss/lib/result";
 
 const Calculator = () => {
+  const { handleHistoryModal, setHistories } = useContext(AuthConext);
   const [input, setInput] = useState("");
+  console.log(input, "input");
   const [calculatorOn, setCalculatorOn] = useState(true);
   const [isShifted, setIsShifted] = useState(false);
-  const [history, setHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
-  const [open, setOpen] = useState(false);
   const storedUserDetails = localStorage.getItem("usersDetals");
   const details = JSON.parse(storedUserDetails);
   const Navigate = useNavigate();
-
+  const [result, setResult] = useState("");
   useEffect(() => {
-    if (details === null || details == undefined || details?.name === null) {
+    if (details === null || details === undefined) {
       return Navigate("/");
     }
   }, [details, Navigate]);
@@ -38,11 +41,19 @@ const Calculator = () => {
     setIsShifted(!isShifted);
   };
 
-  const calculate = () => {
+  const handleResult = () => {
     try {
       const result = eval(input);
-      setHistory([...history, { input, result }]);
-      setInput(result.toString());
+      setResult(result);
+      setHistories((prev) => [
+        ...prev,
+        {
+          inputData: input,
+          result,
+        },
+      ]);
+
+      setInput("");
     } catch (error) {
       setInput("Error");
     }
@@ -50,6 +61,7 @@ const Calculator = () => {
 
   const clear = () => {
     setInput("");
+    setResult("");
   };
 
   const calculateLog = () => {
@@ -112,14 +124,6 @@ const Calculator = () => {
     setInput(input + ")");
   };
 
-  const toggleCalculator = () => {
-    setCalculatorOn(!calculatorOn);
-  };
-
-  const toggleHistory = () => {
-    setShowHistory(!showHistory);
-  };
-
   // const handleOpen = () => setOpen((cur) => !cur);
   return (
     <section className="grid md:grid-cols-2 gap-5 container mx-auto grid-cols-1 h-screen md:py-6">
@@ -127,20 +131,18 @@ const Calculator = () => {
         <div>
           {/* Input area */}
           <div className="py-3">
-            {showHistory ? (
-              <ul>
-                {history.map((entry, index) => (
-                  <li key={index}>
-                    {entry.input} = {entry.result}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <input type="text" value={input} readOnly className="w-full" />
-            )}
+            <input
+              type="text"
+              value={input === "" && result !== "" ? result : input}
+              readOnly
+              className="w-full"
+            />
             {/* History icon and text */}
-            <Button className="flex gap-1 items-center bg-[#ff9] text-black">
-              <MdHistory onClick={toggleHistory} />
+            <Button
+              className="flex gap-1 items-center bg-[#ff9] text-black"
+              onClick={handleHistoryModal}
+            >
+              <MdHistory />
               view history
             </Button>
           </div>
@@ -149,7 +151,7 @@ const Calculator = () => {
         <CustomButton
           handleClick={handleClick}
           handleShiftClick={handleShiftClick}
-          calculate={calculate}
+          calculate={handleResult}
           clear={clear}
           isShifted={isShifted}
           addOpeningParenthesis={addOpeningParenthesis}
@@ -164,7 +166,7 @@ const Calculator = () => {
           </Button>
           <Button
             className="bg-black flex-initial w-full p-4 text-white hover:bg-gray-300 active:bg-blue-200"
-            onClick={calculate}
+            onClick={handleResult}
           >
             <FaEquals className=" ml-40" />
           </Button>
@@ -182,20 +184,20 @@ const Calculator = () => {
         </div>
       </div>
       <div className="rounded-lg shadow-lg">
-        <h5 className="text-center shadow font-bold text-3xl bg-[#ff9]">
+        <h5 className="text-center shadow font-bold text-3xl p-5 bg-[#ff9]">
           {" "}
           User Details
         </h5>
         <div className="">
           <div className="px-10 uppercase py-8 text-lg">
-            <p className="">NAME : {details.name}</p>
-            <p> USER EMAIL: {details.email}</p>
-            <p> DEPARTMENT: {details.matricNumber}</p>
-            <p> LEVEL : {details.yearLevel}</p>
-            <p> DEPARTMENT : {details.department}</p>
+            <p className="">NAME : {details?.name}</p>
+            <p> USER EMAIL: {details?.email}</p>
+            <p> DEPARTMENT: {details?.matricNumber}</p>
+            <p> LEVEL : {details?.yearLevel}</p>
+            <p> DEPARTMENT : {details?.department}</p>
           </div>
           <div>
-            <h5 className="text-center shadow rounded-sm font-bold text-3xl bg-[#ff9]">
+            <h5 className="text-center  py-3 shadow rounded-sm font-bold text-3xl bg-[#ff9]">
               Instruction About The Calcalator
             </h5>
 
@@ -224,6 +226,7 @@ const Calculator = () => {
           </div>
         </div>
       </div>
+      <HistoryModal />
     </section>
   );
 };

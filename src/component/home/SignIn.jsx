@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
 
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Button,
   Dialog,
@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 import Register from "./Register";
 import { Heading } from "./Heading";
+import AuthConext from "../../context/authContext";
 
 const defaultValue = {
   name: "",
@@ -25,7 +26,8 @@ const defaultValue = {
   department: "",
 };
 // eslint-disable-next-line react/prop-types
-const SignIn = ({ onClose, open }) => {
+const SignIn = () => {
+  const { handleRegisterModal, auth, onCloseModal } = useContext(AuthConext);
   const [formError, setFormError] = useState({});
   const [formData, setFormData] = useState(defaultValue);
   const [userDetails, setUserDetails] = useState(null);
@@ -75,12 +77,17 @@ const SignIn = ({ onClose, open }) => {
   };
 
   return (
-    <Dialog size="xs" open={open} className=" shadow-none " handler={onClose}>
+    <Dialog
+      size="xs"
+      open={auth.loginModal}
+      className=" shadow-none "
+      handler={onCloseModal}
+    >
       <div className="flex items-center px-4 ">
         <Card
           color="transparent"
           shadow={false}
-          className="h-[600px]  overflow-y-auto overflow-x-hidden w-full"
+          className="h-[600px]  overflow-y-auto p-4 overflow-x-hidden w-full"
         >
           <Heading
             text="Login"
@@ -252,9 +259,9 @@ const SignIn = ({ onClose, open }) => {
               className="mt-4 text-center font-normal flex justify-center gap-2"
             >
               No existing account?
-              <a to="" className="font-medium text-[#ff6600]">
-                <Register />
-              </a>
+              <button onClick={handleRegisterModal} className="text-red-500">
+                Register
+              </button>
             </Typography>
           </form>
         </Card>

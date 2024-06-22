@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CarouselWithContent } from "../component/CarouselWithContent";
 import SignIn from "../component/home/SignIn";
 import Register from "../component/home/Register";
+import AuthConext from "../context/authContext";
 
 const Home = () => {
-  const [open, setOpen] = useState(false);
-  const [openRegister, setOpenRegister] = useState(false);
-  const handleModal = () => setOpen((prevState) => !prevState);
-  const handleRegisterModal = () => setOpenRegister((prevState) => !prevState);
+  const { handleLoginModal, handleRegisterModal, auth, onCloseModal } =
+    useContext(AuthConext);
   return (
     <main>
       <nav className="  px-6 py-6  rounded-md shadow-md	text-xl cursor-pointer">
@@ -22,7 +21,7 @@ const Home = () => {
           </div>
           <ul className="flex gap-3  ">
             <li className="text-center rounded-md text-white p-3 bg-deep-orange-800 hover:bg-gray-700">
-              <button onClick={handleModal}>Login</button>
+              <button onClick={handleLoginModal}>Login</button>
             </li>
             <div className="text-center rounded-md text-white p-3 bg-deep-orange-800 hover:bg-gray-700	">
               <button onClick={handleRegisterModal}>Register</button>
@@ -34,8 +33,8 @@ const Home = () => {
       <section className=" mx-auto max-w-screen-xl">
         <CarouselWithContent />
       </section>
-      <SignIn open={open} onClose={handleModal} />
-      <Register open={openRegister} onClose={handleRegisterModal} />
+      <SignIn />
+      <Register />
     </main>
   );
 };

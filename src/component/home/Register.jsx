@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Card,
   Input,
@@ -10,9 +10,10 @@ import {
   Typography,
   Dialog,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
-import SignIn from "./SignIn";
+import { useNavigate } from "react-router-dom";
+
 import { Heading } from "./Heading";
+import AuthConext from "../../context/authContext";
 
 const defaultValue = {
   name: "",
@@ -23,7 +24,8 @@ const defaultValue = {
 };
 
 // eslint-disable-next-line react/prop-types
-const Register = ({ open, onClose }) => {
+const Register = () => {
+  const { handleLoginModal, auth, onCloseModal } = useContext(AuthConext);
   const [formData, setFormData] = useState(defaultValue);
   const [formError, setFormError] = useState({});
 
@@ -35,11 +37,6 @@ const Register = ({ open, onClose }) => {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
-  };
-
-  const handleCloseAndNavigate = () => {
-    setOpen(false);
-    navigate("/SignIn");
   };
 
   const validateForm = () => {
@@ -72,8 +69,8 @@ const Register = ({ open, onClose }) => {
   return (
     <Dialog
       size="xs"
-      open={open}
-      handler={onClose}
+      open={auth.registerModal}
+      handler={onCloseModal}
       className="shadow-none h-[600px] overflow-y-auto overflow-x-hidden w-full"
     >
       <div className="flex items-center">
@@ -112,7 +109,7 @@ const Register = ({ open, onClose }) => {
                 </Typography>
               )}
 
-              <Typography variant="h6" color="blue-gray" className="-mb-3">
+              <Typography variant="h6" color="blue-gray" className="mb-2">
                 Your Email
               </Typography>
               <Input
@@ -132,7 +129,7 @@ const Register = ({ open, onClose }) => {
                 </Typography>
               )}
 
-              <Typography variant="h6" color="blue-gray" className="-mb-3">
+              <Typography variant="h6" color="blue-gray" className="mb-2">
                 Password
               </Typography>
               <Input
@@ -153,7 +150,7 @@ const Register = ({ open, onClose }) => {
                 </Typography>
               )}
 
-              <Typography variant="h6" color="blue-gray" className="-mb-3">
+              <Typography variant="h6" color="blue-gray" className="mb-2">
                 Confirm Password
               </Typography>
               <Input
@@ -211,13 +208,9 @@ const Register = ({ open, onClose }) => {
             </Button>
             <Typography color="gray" className="mt-4 text-center font-normal">
               Already have an account?{" "}
-              <Link
-                to=""
-                className="font-medium text-[#ff6600]"
-                onClick={handleCloseAndNavigate}
-              >
-                <SignIn />
-              </Link>
+              <button onClick={handleLoginModal} className="text-red-500">
+                Login
+              </button>
             </Typography>
           </form>
         </Card>
