@@ -6,28 +6,72 @@ import Register from "../component/home/Register";
 import AuthConext from "../context/authContext";
 
 const Home = () => {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { handleLoginModal, handleRegisterModal, auth, onCloseModal } =
     useContext(AuthConext);
   return (
     <main>
-      <nav className="  px-6 py-6  rounded-md shadow-md	text-xl cursor-pointer">
+      <nav className="  px-6 py-6 shadow-md	">
         <ul className="flex items-center justify-between mx-auto max-w-screen-xl ">
-          <div className="text-red-600">
+          <div className="flex items-center ">
             <img
               src="https://fedpoffaonline.edu.ng/images/demo/default/logo/logo2.png"
               alt="logo"
-              width={200}
+              className="md:h-20 h-10 w-auto"
             />
           </div>
-          <ul className="flex gap-3  ">
-            <li className="text-center rounded-md text-white p-3 bg-deep-orange-800 hover:bg-gray-700">
+          <ul className="hidden md:flex gap-3">
+            <li className="text-white bg-deep-orange-800 hover:bg-gray-700 rounded-md px-4 py-4">
               <button onClick={handleLoginModal}>Login</button>
             </li>
-            <div className="text-center rounded-md text-white p-3 bg-deep-orange-800 hover:bg-gray-700	">
+            <div className=" text-white py-4 px-4 bg-deep-orange-800 hover:bg-gray-700	rounded-md">
               <button onClick={handleRegisterModal}>Register</button>
             </div>
           </ul>
+          <div className="md:hidden">
+            <button
+              className="text-gray-700 focus:outline-none"
+              onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <svg
+                className="w-10 h-10"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
+            </button>
+          </div>
         </ul>
+        {isMobileMenuOpen && (
+          <div className="md:hidden">
+            <ul className="flex flex-col items-end gap-3 mt-4 shadow-sm">
+              <li>
+                <button
+                  onClick={handleLoginModal}
+                  className="text-white bg-deep-orange-800 hover:bg-gray-700 rounded-md px-4 py-2 w-full"
+                >
+                  Login
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={handleRegisterModal}
+                  className="text-white bg-deep-orange-800 hover:bg-gray-700 rounded-md px-4 py-2 w-full"
+                >
+                  Register
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </nav>
 
       <section className=" mx-auto max-w-screen-xl">

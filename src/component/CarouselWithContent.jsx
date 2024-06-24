@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-unescaped-entities */
 import { Typography } from "@material-tailwind/react";
-
 import { Carousel } from "flowbite-react";
-import Register from "./home/Register";
 
 export function CarouselWithContent() {
   return (
@@ -17,19 +15,19 @@ export function CarouselWithContent() {
           alt="image 2"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 grid h-[100%] w-full place-items-center bg-black/75">
+        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75 px-4 sm:px-6 lg:px-8">
           <div className="w-3/4 text-center md:w-2/4">
             <Typography
               variant="h1"
               color="white"
-              className="mb-4  text-3xl font-bold md:text-4xl lg:text-5xl leading-6  text-white"
+              className="mb-4 py-3 font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-6  text-white"
             >
               Welcome To Federal Polytechnic Offa
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80 text-white justify-center 	"
+              className="mb-12 opacity-80 text-base sm:text-lg md:text-xl lg:text-2xl"
             >
               The Federal Polytechnic, Offa came into existence in 1992. A
               presidential pronouncement of its establishment was made at the
@@ -46,19 +44,19 @@ export function CarouselWithContent() {
           alt="image 1"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75">
+        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75 px-4 sm:px-6 lg:px-8">
           <div className="w-3/4 text-center md:w-2/4">
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl text-white"
+              className="mb-4 py-3 font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-6  text-white"
             >
               School Of Computing (Scientific Calculator)
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80 text-white"
+              className="mb-12 opacity-80 text-base sm:text-lg md:text-xl lg:text-2xl"
             >
               The Computer Science Department was established in October 1992
               with intake of 120 National Diploma (ND) students. The Higher
@@ -76,19 +74,19 @@ export function CarouselWithContent() {
           className="h-full w-full object-cover"
         />
 
-        <div className="absolute inset-0 grid h-[100%] w-full place-items-center bg-black/75">
+        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75 px-4 sm:px-6 lg:px-8">
           <div className="w-3/4 text-center md:w-2/4">
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl text-white"
+              className="mb-4 py-3 font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-6  text-white"
             >
               PROJECT TOPIC (Simple Scientific Calculator)
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80 text-white"
+              className="mb-12 opacity-80 text-base sm:text-lg md:text-xl lg:text-2xl"
             >
               A scientific calculator is a versatile device designed to perform
               advanced mathematical, engineering, and scientific calculations.
@@ -96,9 +94,7 @@ export function CarouselWithContent() {
               like trigonometric, logarithmic, and exponential calculations,
               which are essential for fields such as physics, chemistry, and
               engineering. They typically feature a multi-line display, allowing
-              users to view and edit complex equations. The introduction of
-              scientific calculators has significantly improved efficiency in
-              problem-solving and accuracy in complex computations.
+              users to view and edit complex equations.
             </Typography>
           </div>
         </div>
