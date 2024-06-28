@@ -16,7 +16,6 @@ import { Heading } from "./Heading";
 import AuthConext from "../../context/authContext";
 
 const defaultValue = {
-  name: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -40,7 +39,6 @@ const Register = () => {
 
   const validateForm = () => {
     const errors = {};
-    if (!formData.name) errors.name = "Name is required";
     if (!formData.email) errors.email = "Email is required";
     if (!formData.password) errors.password = "Password is required";
     if (!formData.confirmPassword)
@@ -78,36 +76,13 @@ const Register = () => {
           shadow={false}
           className="rounded-md shadow-md p-4"
         >
-          <Heading
-            text="Register"
-            description=" Nice to meet you! Enter your details to create an account."
-          />
+          <Heading text="Login" description=" " />
 
           <form
             className="mt-8 mb-2 w-[15rem] max-w-screen-lg sm:w-96"
             onSubmit={handleSubmit}
           >
             <div className="mb-1 flex flex-col gap-2">
-              <Typography variant="h6" color="blue-gray">
-                Your Name
-              </Typography>
-              <Input
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                size="lg"
-                placeholder="John Doe"
-                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                labelProps={{
-                  className: "before:content-none after:content-none",
-                }}
-              />
-              {formError.name && (
-                <Typography color="red" className="text-xs">
-                  {formError.name}
-                </Typography>
-              )}
-
               <Typography variant="h6" color="blue-gray" className="mb-2">
                 Your Email
               </Typography>

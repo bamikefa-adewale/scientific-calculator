@@ -22,11 +22,11 @@ const Home = () => {
           </div>
           <ul className="hidden md:flex gap-3">
             <li className="text-white bg-deep-orange-800 hover:bg-gray-700 rounded-md px-4 py-4">
-              <button onClick={handleLoginModal}>Login</button>
+              <button onClick={handleLoginModal}>Register</button>
             </li>
-            <div className=" text-white py-4 px-4 bg-deep-orange-800 hover:bg-gray-700	rounded-md">
-              <button onClick={handleRegisterModal}>Register</button>
-            </div>
+            {/* <div className=" text-white py-4 px-4 bg-deep-orange-800 hover:bg-gray-700	rounded-md">
+              <button onClick={handleRegisterModal}>Login</button>
+            </div> */}
           </ul>
           <div className="md:hidden">
             <button
@@ -59,14 +59,6 @@ const Home = () => {
                   className="text-white bg-deep-orange-800 hover:bg-gray-700 rounded-md px-4 py-2 w-full"
                 >
                   Login
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={handleRegisterModal}
-                  className="text-white bg-deep-orange-800 hover:bg-gray-700 rounded-md px-4 py-2 w-full"
-                >
-                  Register
                 </button>
               </li>
             </ul>

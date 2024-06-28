@@ -70,7 +70,7 @@ const SignIn = () => {
 
     if (Object.keys(errors).length === 0) {
       console.log("Form Data Submitted:", formData);
-      localStorage.setItem("usersDetals", JSON.stringify(formData));
+      localStorage.setItem("usersDetails", JSON.stringify(formData));
       // Add your form submission logic here
       navigate("/Calculator");
     }
@@ -90,8 +90,8 @@ const SignIn = () => {
           className="h-[600px]  overflow-y-auto p-4 overflow-x-hidden w-full"
         >
           <Heading
-            text="Login"
-            description=" Nice to meet you! Enter your details to Login."
+            text="Register"
+            description="Nice to meet you! Enter your details to create an account.."
           />
 
           <form
@@ -167,7 +167,7 @@ const SignIn = () => {
                 value={formData.yearLevel}
                 onChange={handleChange}
                 className="!border-blue-gray-200 focus:!border-t-gray-900 rounded"
-                error={!formError.yearLevel}
+                error={formError.yearLevel}
               >
                 <option>Please select</option>
                 <option>ND-1 FT</option>
@@ -252,7 +252,8 @@ const SignIn = () => {
               className="mt-6 bg-deep-orange-800 hover:bg-gray-700"
               fullWidth
             >
-              Login
+              {" "}
+              Register
             </Button>
             <Typography
               color="gray"
@@ -260,7 +261,7 @@ const SignIn = () => {
             >
               No existing account?
               <button onClick={handleRegisterModal} className="text-red-500">
-                Register
+                Login
               </button>
             </Typography>
           </form>
