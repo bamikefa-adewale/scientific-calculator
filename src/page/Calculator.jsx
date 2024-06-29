@@ -185,30 +185,42 @@ const Calculator = () => {
           </div>
         </div>
         <div className="rounded-lg shadow-lg">
-          <h5 className="text-center shadow font-bold text-2xl p-3 bg-[#ff9]">
+          <h5 className="text-center shadow text-base font-bold p-3 text-[orange] bg-[#ff9]">
             User Details
           </h5>
-          <div className="px-8 uppercase py-4 text-lg sm:px-10">
-            <p className="">NAME : {userData?.fullName}</p>
-            <p> USER EMAIL: {userData?.email}</p>
-            <p> MATRIC NUMBER: {userData?.matricNumber}</p>
-            <p> LEVEL :{userData?.level}</p>
-            <p> DEPARTMENT : {userData?.department}</p>
+          <div className="px-8 uppercase py-4 text-sm sm:px-10">
+            <span className="text-[orange] flex ">
+              NAME: <p className="text-black ml-2 "> {userData?.fullName}</p>
+            </span>
+            <span className="text-[orange] flex ">
+              USER EMAIL: <p className="text-black ml-2 "> {userData?.email}</p>
+            </span>
+            <span className="text-[orange] flex ">
+              MATRIC NUMBER:{" "}
+              <p className="text-black ml-2 "> {userData?.matricNumber}</p>
+            </span>
+            <span className="text-[orange] flex ">
+              LEVEL: <p className="text-black ml-2 ">{userData?.level}</p>
+            </span>
+            <span className="text-[orange] flex  ">
+              DEPARTMENT:{" "}
+              <p className="text-black ml-2 "> {userData?.department}</p>
+            </span>
           </div>
           <div>
-            <p className="text-center  py-3 shadow rounded-sm font-bold text-3xl bg-[#ff9]">
+            <p className="text-center shadow text-base font-bold  p-3 text-[orange] bg-[#ff9]">
               Instruction About The Calcalator
             </p>
 
             <div className="p-5">
-              <p className=" font-bold text-2xl">
+              <p className="  text-base">
                 Using a scientific calculator involves several steps to perform
                 various mathematical operations. Here is a brief guide on how to
                 use : <br /> 1. Basic Arithmetic <br /> 2.Trigonometric
                 Functions
               </p>
-              <div className="text-2xl font-normal">
-                <h1 className="text-[orange] text-3xl"> Note:</h1>
+              <div className="text-sm font-normal">
+                <h1 className="text-[orange] text-3xl m-2"> Note:</h1>
                 <p>
                   1 : Sine: Press the number button, press the sin button, and
                   then press "="
