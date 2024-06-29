@@ -11,25 +11,20 @@ import { Button } from "@material-tailwind/react";
 import { FaEquals } from "react-icons/fa";
 import AuthConext from "../context/authContext";
 import { HistoryModal } from "../component/HistoryModal";
+import { useGetUser } from "../hooks/useGetUser";
 
 const Calculator = () => {
+  const { userData } = useGetUser();
   const { handleHistoryModal, auth, setHistories } = useContext(AuthConext);
   const [result, setResult] = useState("");
   const [isShifted, setIsShifted] = useState(false);
   const [input, setInput] = useState("");
   console.log(input, "input");
   const storedUserDetails = localStorage.getItem("usersDetails");
-  const Details = JSON.parse(storedUserDetails);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (Details === null || Details === undefined) {
-      return navigate("/");
-    }
-  }, [Details, navigate]);
-
   const handleSignOut = () => {
-    localStorage.removeItem("usersDetails");
+    localStorage.removeItem("auth-token");
     return navigate("/");
   };
   const handleClick = (value) => {
@@ -190,20 +185,20 @@ const Calculator = () => {
           </div>
         </div>
         <div className="rounded-lg shadow-lg">
-          <h5 className="text-center shadow font-bold text-3xl p-5 bg-[#ff9]">
+          <h5 className="text-center shadow font-bold text-2xl p-3 bg-[#ff9]">
             User Details
           </h5>
-          <div className="px-10 uppercase py-8 text-lg sm:px-10">
-            <p className="">NAME : {Details?.name}</p>
-            <p> USER EMAIL: {Details?.email}</p>
-            <p> DEPARTMENT: {Details?.matricNumber}</p>
-            <p> LEVEL : {Details?.yearLevel}</p>
-            <p> DEPARTMENT : {Details?.department}</p>
+          <div className="px-8 uppercase py-4 text-lg sm:px-10">
+            <p className="">NAME : {userData?.fullName}</p>
+            <p> USER EMAIL: {userData?.email}</p>
+            <p> MATRIC NUMBER: {userData?.matricNumber}</p>
+            <p> LEVEL :{userData?.level}</p>
+            <p> DEPARTMENT : {userData?.department}</p>
           </div>
           <div>
-            <h5 className="text-center  py-3 shadow rounded-sm font-bold text-3xl bg-[#ff9]">
+            <p className="text-center  py-3 shadow rounded-sm font-bold text-3xl bg-[#ff9]">
               Instruction About The Calcalator
-            </h5>
+            </p>
 
             <div className="p-5">
               <p className=" font-bold text-2xl">

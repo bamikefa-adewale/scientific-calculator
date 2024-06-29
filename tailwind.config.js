@@ -17,15 +17,5 @@ module.exports = withMT({
       },
     },
   },
-  plugins: [
-    function ({ addUtilities }) {
-      addUtilities({
-        ".text-shadow-custom": {
-          textShadow: "4px 3px 4px rgba(12,73,145,0.59)",
-        },
-      });
-    },
-    // ...
-    flowbite.plugin(),
-  ],
+  plugins: [],
 });

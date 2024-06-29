@@ -25,7 +25,7 @@ const HomePage = () => {
         <Header />
         <UserInput input={userInput} onChange={handleChange} />
       </div>
-      <div className="items-center my-10 mx-[40%]  shadow-lg">
+      <div className="">
         <Result resultInput={userInput} />
       </div>
     </>

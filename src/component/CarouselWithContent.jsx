@@ -13,7 +13,7 @@ export function CarouselWithContent() {
         <img
           src="https://res.cloudinary.com/dbrub0d6r/image/upload/v1718720292/photo-1523050854058-8df90110c9f1_uvdpzy.avif"
           alt="image 2"
-          className="h-full w-full object-cover"
+          className="h-screen w-full object-cover"
         />
         <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75 px-4 sm:px-6 lg:px-8">
           <div className="w-3/4 text-center md:w-2/4">
@@ -42,7 +42,7 @@ export function CarouselWithContent() {
         <img
           src="https://res.cloudinary.com/dbrub0d6r/image/upload/v1718720689/photo-1528901166007-3784c7dd3653_khysya.avif"
           alt="image 1"
-          className="h-full w-full object-cover"
+          className="h-screen w-full object-cover"
         />
         <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75 px-4 sm:px-6 lg:px-8">
           <div className="w-3/4 text-center md:w-2/4">
@@ -71,7 +71,7 @@ export function CarouselWithContent() {
         <img
           src="https://res.cloudinary.com/dbrub0d6r/image/upload/v1718721690/photo-1625225233840-695456021cde_qzskcs.avif"
           alt="image 3"
-          className="h-full w-full object-cover"
+          className="h-screen w-full object-cover"
         />
 
         <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75 px-4 sm:px-6 lg:px-8">
