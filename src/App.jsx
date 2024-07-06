@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./page/Home";
 import Calculator from "./page/Calculator";
 import Investment from "./page/Investment";
-import DbLogin from "./page/DbLogin";
 import ProtectRoute from "./page/protectRoute";
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
           <Route index element={<Calculator />} />
         </Route>
         <Route path="/Investment" element={<Investment />} />
-        <Route path="/DatabaseLogin" element={<DbLogin />} />
       </Routes>
     </div>
   );

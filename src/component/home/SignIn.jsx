@@ -1,17 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
 
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Button,
-  Dialog,
-  Card,
-  Typography,
-  Checkbox,
-} from "@material-tailwind/react";
+import React, { useContext } from "react";
+import { Button, Card, Typography } from "@material-tailwind/react";
 import { Heading } from "./Heading";
 import AuthConext from "../../context/authContext";
-import { useSignUp } from "../../hooks/useSignUp";
+
 import { CustomInput } from "../CustomInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -57,7 +51,7 @@ const SignIn = () => {
           />
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" flex flex-col gap-2   p-2">
+            <div className=" flex flex-col gap-2 p-2">
               {loginInputLists?.map((list) => (
                 <CustomInput
                   key={list.name}

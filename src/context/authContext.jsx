@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(initialState);
   const getHistory = localStorage.getItem("histories");
   const [histories, setHistories] = useState(JSON.parse(getHistory) ?? []);
-  console.log(histories);
   useEffect(() => {
     if (histories !== null && histories !== undefined) {
       localStorage.setItem("histories", JSON.stringify(histories));

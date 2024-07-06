@@ -2,13 +2,7 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Button,
-  Dialog,
-  Card,
-  Typography,
-  Checkbox,
-} from "@material-tailwind/react";
+import { Button, Card, Typography, Checkbox } from "@material-tailwind/react";
 import { Heading } from "./Heading";
 import AuthConext from "../../context/authContext";
 import { useSignUp } from "../../hooks/useSignUp";
@@ -45,8 +39,7 @@ const SignUp = () => {
   });
 
   const { isPending, mutate } = useSignUp();
-  const { handleRegisterModal, handleLoginModal, auth, onCloseModal } =
-    useContext(AuthConext);
+  const { handleLoginModal, auth, onCloseModal } = useContext(AuthConext);
   const onSubmit = (data) => {
     if (!term) return toast.error("Terms and condition required");
     const values = {

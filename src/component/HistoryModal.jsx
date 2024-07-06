@@ -1,10 +1,17 @@
 import { Dialog } from "@material-tailwind/react";
 import { useContext } from "react";
 import AuthConext from "../context/authContext";
+import { useGetAllHistories } from "../hooks/useGetAllHistories";
+import { useGetUser } from "../hooks/useGetUser";
 
 export const HistoryModal = () => {
-  const { auth, onCloseModal, histories } = useContext(AuthConext);
-  console.log(histories);
+  const { auth, onCloseModal } = useContext(AuthConext);
+  const { userData } = useGetUser();
+  const { histories } = useGetAllHistories();
+  const userHistories = histories?.filter(
+    (history) => history?.attributes?.userId === userData?.id
+  );
+  console.log(userData);
   return (
     <Dialog
       size="xs"
@@ -13,16 +20,16 @@ export const HistoryModal = () => {
       className=" h-[600px]  p-6  w-full  "
     >
       <h2 className="text-1xl py-3 font-bold flex justify-center uppercase text-deep-orange-800">
-        Welcome to history
+        Welcome to history {userData?.fullName}
       </h2>
-      {histories?.map((history, i) => (
-        <div
-          className="font-semibold my-4 text-base flex gap-4 text-black "
-          key={i}
-        >
-          <h2>{history.inputData}</h2>
-          <p>{history?.result}</p>
-        </div>
+      {userHistories?.map((history) => (
+        <section key={history?.id}>
+          <div className="font-semibold my-2 text-base flex gap-4 text-black ">
+            <h2>{history?.attributes?.inputData}</h2>
+            <p>{history?.attributes?.result}</p>
+          </div>
+          <small>{history?.attributes?.createdAt}</small>
+        </section>
       ))}
     </Dialog>
   );

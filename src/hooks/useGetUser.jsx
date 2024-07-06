@@ -7,7 +7,6 @@ export const useGetUser = () => {
     queryKey: ["current-user"],
   });
 
-  console.log(data);
   return {
     userData: data,
     isLoading,

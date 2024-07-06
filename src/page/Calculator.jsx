@@ -12,15 +12,17 @@ import { FaEquals } from "react-icons/fa";
 import AuthConext from "../context/authContext";
 import { HistoryModal } from "../component/HistoryModal";
 import { useGetUser } from "../hooks/useGetUser";
+import { useAddHistory } from "../hooks/useAddHistory";
 
 const Calculator = () => {
+  const { mutate, isPending } = useAddHistory();
   const { userData } = useGetUser();
+  console.log(userData?.id);
   const { handleHistoryModal, auth, setHistories } = useContext(AuthConext);
   const [result, setResult] = useState("");
   const [isShifted, setIsShifted] = useState(false);
   const [input, setInput] = useState("");
-  console.log(input, "input");
-  const storedUserDetails = localStorage.getItem("usersDetails");
+
   const navigate = useNavigate();
 
   const handleSignOut = () => {
@@ -43,7 +45,17 @@ const Calculator = () => {
   const handleResult = () => {
     try {
       const result = eval(input);
+
       setResult(result);
+
+      const values = {
+        data: {
+          inputData: input,
+          result: String(result),
+          userId: userData?.id,
+        },
+      };
+      mutate(values);
       setHistories((prev) => [
         ...prev,
         {
@@ -123,6 +135,13 @@ const Calculator = () => {
     setInput(input + ")");
   };
 
+  const CalculatePower = () => {
+    const inputValue = parseFloat(input, "");
+    if (!isNaN(inputValue) && !isNaN(inputValue)) {
+      const result = Math.pow(inputValue, inputValue);
+      setInput(result);
+    }
+  };
   return (
     <section className="">
       <Button onClick={handleSignOut} className=" m-3 py-4">
@@ -181,6 +200,7 @@ const Calculator = () => {
               calculateFactorial={calculateFactorial}
               calculateSquareRoot={calculateSquareRoot}
               calculatePercentage={calculatePercentage}
+              CalculatePower={CalculatePower}
             />
           </div>
         </div>

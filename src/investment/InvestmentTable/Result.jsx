@@ -8,7 +8,7 @@ import {
 export const Result = ({ resultInput }) => {
   const annualData = [];
   const resultData = calculateInvestmentResults(resultInput, annualData);
-  console.log(resultData, annualData);
+
   const initialInvestment =
     resultData[0].valueEndOfYear -
     resultData[0].interest -

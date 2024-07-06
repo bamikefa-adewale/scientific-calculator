@@ -11,7 +11,6 @@ export const useSignUp = () => {
   const { isPending, mutate } = useMutation({
     mutationFn: signUpApi,
     onSuccess: (data) => {
-      console.log(data);
       toast.success("User Register Successful");
       onCloseModal();
       localStorage?.setItem("auth-token", JSON.stringify(data?.jwt));

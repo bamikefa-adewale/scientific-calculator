@@ -51,7 +51,7 @@ export function CarouselWithContent() {
               color="white"
               className="mb-4 py-3 font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-6  text-white"
             >
-              School Of Computing (Scientific Calculator)
+              School Of Computing (Computer Science Department)
             </Typography>
             <Typography
               variant="lead"
