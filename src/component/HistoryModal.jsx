@@ -20,8 +20,10 @@ export const HistoryModal = () => {
       className=" h-[600px]  p-6  w-full  "
     >
       <h2 className="text-1xl py-3 font-bold flex justify-center uppercase text-deep-orange-800">
-        Welcome to history {userData?.fullName}
+        Welcome to history
       </h2>
+      <br />
+      <h4 className="text-red-200"> {userData?.fullName}</h4>
       {userHistories?.map((history) => (
         <section key={history?.id}>
           <div className="font-semibold my-2 text-base flex gap-4 text-black ">
