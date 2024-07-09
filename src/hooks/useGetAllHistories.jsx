@@ -6,7 +6,6 @@ export const useGetAllHistories = () => {
     queryKey: ["histories"],
     queryFn: fetchHistoryApi,
   });
-  console.log(data?.data);
   return {
     histories: data?.data,
     isLoading,

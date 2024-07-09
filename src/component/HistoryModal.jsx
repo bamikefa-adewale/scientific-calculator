@@ -9,9 +9,10 @@ export const HistoryModal = () => {
   const { userData } = useGetUser();
   const { histories } = useGetAllHistories();
   const userHistories = histories?.filter(
-    (history) => history?.attributes?.userId === userData?.id
+    (history) => history?.attributes?.userId !== userData?.id
   );
-  console.log(userData);
+
+  console.log(userHistories);
   return (
     <Dialog
       size="xs"
@@ -24,11 +25,12 @@ export const HistoryModal = () => {
       </h2>
       <br />
       <h4 className="text-red-200"> {userData?.fullName}</h4>
+
       {userHistories?.map((history) => (
         <section key={history?.id}>
           <div className="font-semibold my-2 text-base flex gap-4 text-black ">
             <h2>{history?.attributes?.inputData}</h2>
-            <p>{history?.attributes?.result}</p>
+            <p> = {history?.attributes?.result}</p>
           </div>
           <small>{history?.attributes?.createdAt}</small>
         </section>
