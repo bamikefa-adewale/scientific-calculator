@@ -11,13 +11,18 @@ export const useSignUp = () => {
   const { isPending, mutate } = useMutation({
     mutationFn: signUpApi,
     onSuccess: (data) => {
-      toast.success("User Register Successful");
-      onCloseModal();
-      localStorage?.setItem("auth-token", JSON.stringify(data?.jwt));
-      navigate("/calculator");
+      console.log(data);
+      // Check if the access_token is available
+      if (data?.jwt) {
+        localStorage.setItem("auth-token", JSON.stringify(data.jwt));
+        toast.success("User Registration Successful");
+        onCloseModal();
+        navigate("/calculator"); // Navigate to calculator
+      }
     },
     onError: (error) => {
       console.log(error);
+      toast.error("Registration failed: " + error.message);
     },
   });
   return {

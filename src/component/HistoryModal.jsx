@@ -9,16 +9,15 @@ export const HistoryModal = () => {
   const { userData } = useGetUser();
   const { histories } = useGetAllHistories();
   const userHistories = histories?.filter(
-    (history) => history?.attributes?.userId !== userData?.id
+    (history) => history?.attributes?.userId === userData?.id
   );
 
-  console.log(userHistories);
   return (
     <Dialog
       size="xs"
       open={auth.historyModal}
       handler={onCloseModal}
-      className=" h-[600px]  p-6  w-full  "
+      className=" h-[600px]  p-6  w-full"
     >
       <h2 className="text-1xl py-3 font-bold flex justify-center uppercase text-deep-orange-800">
         Welcome to history
@@ -27,12 +26,12 @@ export const HistoryModal = () => {
       <h4 className="text-red-200"> {userData?.fullName}</h4>
 
       {userHistories?.map((history) => (
-        <section key={history?.id}>
+        <section key={history?.id} className="">
           <div className="font-semibold my-2 text-base flex gap-4 text-black ">
             <h2>{history?.attributes?.inputData}</h2>
             <p> = {history?.attributes?.result}</p>
           </div>
-          <small>{history?.attributes?.createdAt}</small>
+          <h2>{history?.attributes?.createdAt}</h2>
         </section>
       ))}
     </Dialog>

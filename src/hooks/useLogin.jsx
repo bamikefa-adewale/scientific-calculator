@@ -11,10 +11,12 @@ export const useLogin = () => {
   const { isPending, mutate, error, isError } = useMutation({
     mutationFn: signInApi,
     onSuccess: (data) => {
-      toast.success("User Login Successful");
-      onCloseModal();
-      localStorage?.setItem("auth-token", JSON.stringify(data?.jwt));
-      navigate("/calculator");
+      if (data?.jwt) {
+        localStorage.setItem("auth-token", JSON.stringify(data.jwt)); // Adjust based on what Supabase returns
+        toast.success("User Login Successful");
+        onCloseModal();
+        navigate("/calculator");
+      }
     },
     onError: (error) => {
       console.log(error);

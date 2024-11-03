@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from "react";
 import { CarouselWithContent } from "../component/CarouselWithContent";
-
 import AuthConext from "../context/authContext";
 import SignIn from "../component/home/SignIn";
 import SignUp from "../component/home/SignUp";
@@ -10,6 +9,8 @@ import { Mobile } from "../component/Mobile";
 const Home = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { handleLoginModal, handleRegisterModal } = useContext(AuthConext);
+  const mode = import.meta.env;
+  console.log(mode, "hello");
   return (
     <main>
       <nav className="  px-2 py-4 shadow-md	 ">
@@ -18,7 +19,7 @@ const Home = () => {
             <img
               src="https://fedpoffaonline.edu.ng/images/demo/default/logo/logo2.png"
               alt="logo"
-              className="md:h-12 h-10 "
+              className="md:h-12 h-8"
             />
           </div>
           <ul className="hidden md:flex gap-3">
@@ -45,7 +46,6 @@ const Home = () => {
           </div>
         )}
       </nav>
-
       <section className=" w-full container mx-auto ">
         <CarouselWithContent />
       </section>
