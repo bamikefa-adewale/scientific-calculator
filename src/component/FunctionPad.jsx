@@ -12,6 +12,7 @@ const FunctionPad = ({
   calculateSquareRoot,
   calculatePercentage,
   CalculatePower,
+  CalculatePi,
 }) => {
   return (
     <div className="function-pad">
@@ -23,6 +24,7 @@ const FunctionPad = ({
       <button onClick={calculateSquareRoot}>√</button>
       <button onClick={calculatePercentage}>%</button>
       <button onClick={CalculatePower}>X^</button>
+      <button onClick={CalculatePi}>π</button>
     </div>
   );
 };

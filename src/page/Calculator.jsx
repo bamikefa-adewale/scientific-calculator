@@ -6,67 +6,59 @@ import React, { useContext, useEffect, useState } from "react";
 import CustomButton from "../component/CustomButton";
 import FunctionPad from "../component/FunctionPad";
 import { MdHistory } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+
 import { Button } from "@material-tailwind/react";
 import { FaEquals } from "react-icons/fa";
 import AuthConext from "../context/authContext";
 import { HistoryModal } from "../component/HistoryModal";
-import { useGetUser } from "../hooks/useGetUser";
+
 import { useAddHistory } from "../hooks/useAddHistory";
+import { useGetCurrentUser } from "../hooks/useGetCurrentUser";
+import { useLogout } from "../hooks/useLogout";
 
 const Calculator = () => {
   const { mutate, isPending } = useAddHistory();
-  const { userData } = useGetUser();
-  console.log(userData?.id);
   const { handleHistoryModal, auth, setHistories } = useContext(AuthConext);
   const [result, setResult] = useState("");
   const [isShifted, setIsShifted] = useState(false);
   const [input, setInput] = useState("");
 
-  const navigate = useNavigate();
-
-  const handleSignOut = () => {
-    localStorage.removeItem("auth-token");
-    return navigate("/");
+  const handleShiftClick = () => {
+    setIsShifted(!isShifted);
   };
+
   const handleClick = (value) => {
     if (isShifted && value !== "Shift") {
       setInput(input + value.toUpperCase());
       setIsShifted(false);
     } else {
-      setInput(input + value);
+      // Append "π" when clicked
+      if (value === "π") {
+        setInput(input + "π");
+      } else {
+        setInput(input + value);
+      }
     }
-  };
-
-  const handleShiftClick = () => {
-    setIsShifted(!isShifted);
   };
 
   const handleResult = () => {
     try {
-      const result = eval(input);
+      // Replace "π" with Math.PI before evaluation
+      const expression = input.replace(/π/g, Math.PI);
+      const result = eval(expression);
 
+      const data = {
+        inputData: input,
+        result: String(result),
+        userId: user?.userId,
+      };
       setResult(result);
 
-      const values = {
-        data: {
-          inputData: input,
-          result: String(result),
-          userId: userData?.id,
-        },
-      };
-      mutate(values);
-      setHistories((prev) => [
-        ...prev,
-        {
-          inputData: input,
-          result,
-        },
-      ]);
+      mutate(data);
 
       setInput("");
     } catch (error) {
-      setInput("Error");
+      setInput("");
     }
   };
 
@@ -103,6 +95,7 @@ const Calculator = () => {
   const calculatePercentage = () => {
     const inputValue = parseFloat(input);
     if (!isNaN(inputValue)) {
+      // Divide the input value by 100 to get the percentage
       setInput((inputValue / 100).toString());
     } else {
       setInput("Invalid Input");
@@ -142,13 +135,18 @@ const Calculator = () => {
       setInput(result);
     }
   };
+
+  const CalculatePi = () => {
+    setInput(input + Math.PI.toString());
+  };
+  const { user, status } = useGetCurrentUser();
+  const { logoutLoader, logoutMutate } = useLogout();
   return (
     <section className="">
-      <Button onClick={handleSignOut} className=" m-3 py-4">
-        Sign out
+      <Button onClick={logoutMutate} className=" m-3 py-4">
+        {logoutLoader ? "Loading..." : " Sign out"}
       </Button>
       <div className="grid md:grid-cols-2 gap-10 p-4 md:py-6 py-4 container mx-auto grid-cols-1">
-        {" "}
         <div className="  bg-gray-200 w-full md:[70%] border-2 border-black p-3 rounded-lg shadow-lg">
           {/* Input area */}
           <div className="py-3">
@@ -171,8 +169,6 @@ const Calculator = () => {
           <CustomButton
             handleClick={handleClick}
             handleShiftClick={handleShiftClick}
-            calculate={handleResult}
-            clear={clear}
             isShifted={isShifted}
             addOpeningParenthesis={addOpeningParenthesis}
             addClosingParenthesis={addClosingParenthesis}
@@ -201,32 +197,42 @@ const Calculator = () => {
               calculateSquareRoot={calculateSquareRoot}
               calculatePercentage={calculatePercentage}
               CalculatePower={CalculatePower}
+              CalculatePi={CalculatePi}
             />
           </div>
         </div>
+
         <div className="rounded-lg shadow-lg">
           <h5 className="text-center shadow text-base font-bold p-3 text-[orange] bg-[#ff9]">
             User Details
           </h5>
-          <div className="px-8 uppercase py-4 text-sm sm:px-10">
-            <span className="text-[orange] flex ">
-              NAME: <p className="text-black ml-2 "> {userData?.fullName}</p>
-            </span>
-            <span className="text-[orange] flex ">
-              USER EMAIL: <p className="text-black ml-2 "> {userData?.email}</p>
-            </span>
-            <span className="text-[orange] flex ">
-              MATRIC NUMBER:{" "}
-              <p className="text-black ml-2 "> {userData?.matricNumber}</p>
-            </span>
-            <span className="text-[orange] flex ">
-              LEVEL: <p className="text-black ml-2 ">{userData?.level}</p>
-            </span>
-            <span className="text-[orange] flex  ">
-              DEPARTMENT:{" "}
-              <p className="text-black ml-2 "> {userData?.department}</p>
-            </span>
-          </div>
+          {!user && status === "pending" && (
+            <h2 className="px-8 uppercase py-4 text-sm sm:px-10 ">
+              Loading...
+            </h2>
+          )}
+          {!user && status === "error" && <p>Something went wrong</p>}
+          {user && status === "success" && (
+            <div className="px-8 uppercase py-4 text-sm sm:px-10">
+              <span className="text-[orange] flex ">
+                NAME: <p className="text-black ml-2 "> {user?.fullName}</p>
+              </span>
+              <span className="text-[orange] flex ">
+                USER EMAIL: <p className="text-black ml-2 "> {user?.email}</p>
+              </span>
+              <span className="text-[orange] flex ">
+                MATRIC NUMBER:{" "}
+                <p className="text-black ml-2 "> {user?.matricNumber}</p>
+              </span>
+              <span className="text-[orange] flex ">
+                LEVEL: <p className="text-black ml-2 ">{user?.level}</p>
+              </span>
+              <span className="text-[orange] flex  ">
+                DEPARTMENT:{" "}
+                <p className="text-black ml-2 "> {user?.department}</p>
+              </span>
+            </div>
+          )}
           <div>
             <p className="text-center shadow text-base font-bold  p-3 text-[orange] bg-[#ff9]">
               Instruction About The Calcalator
@@ -257,6 +263,7 @@ const Calculator = () => {
             </div>
           </div>
         </div>
+
         <HistoryModal />
       </div>
     </section>

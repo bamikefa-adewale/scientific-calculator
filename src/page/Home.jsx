@@ -5,12 +5,13 @@ import AuthConext from "../context/authContext";
 import SignIn from "../component/home/SignIn";
 import SignUp from "../component/home/SignUp";
 import { Mobile } from "../component/Mobile";
+import { useGetCurrentUser } from "../hooks/useGetCurrentUser";
 
 const Home = () => {
+  useGetCurrentUser();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { handleLoginModal, handleRegisterModal } = useContext(AuthConext);
-  const mode = import.meta.env;
-  console.log(mode, "hello");
+
   return (
     <main>
       <nav className="  px-2 py-4 shadow-md	 ">

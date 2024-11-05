@@ -7,13 +7,18 @@ export const useAddHistory = () => {
   const queryClient = useQueryClient();
   const { isPending, mutate, error } = useMutation({
     mutationFn: addHistoryApi,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["histories"] });
       toast.success("Successful");
     },
+    onError: (error) => {
+      console.log(error);
+      toast.error("History Failed: " + error.message);
+    },
   });
-  console.log(error);
+
   return {
     mutate,
     isPending,

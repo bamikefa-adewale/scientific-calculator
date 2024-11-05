@@ -13,8 +13,8 @@ export const useSignUp = () => {
     onSuccess: (data) => {
       console.log(data);
       // Check if the access_token is available
-      if (data?.jwt) {
-        localStorage.setItem("auth-token", JSON.stringify(data.jwt));
+      if (data?.$id) {
+        localStorage.setItem("user", JSON.stringify(data));
         toast.success("User Registration Successful");
         onCloseModal();
         navigate("/calculator"); // Navigate to calculator

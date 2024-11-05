@@ -2,15 +2,14 @@ import { Dialog } from "@material-tailwind/react";
 import { useContext } from "react";
 import AuthConext from "../context/authContext";
 import { useGetAllHistories } from "../hooks/useGetAllHistories";
-import { useGetUser } from "../hooks/useGetUser";
+
+import { useGetCurrentUser } from "../hooks/useGetCurrentUser";
+import dayjs from "dayjs";
 
 export const HistoryModal = () => {
   const { auth, onCloseModal } = useContext(AuthConext);
-  const { userData } = useGetUser();
-  const { histories } = useGetAllHistories();
-  const userHistories = histories?.filter(
-    (history) => history?.attributes?.userId === userData?.id
-  );
+  const { user } = useGetCurrentUser();
+  const { histories, status } = useGetAllHistories();
 
   return (
     <Dialog
@@ -23,17 +22,28 @@ export const HistoryModal = () => {
         Welcome to history
       </h2>
       <br />
-      <h4 className="text-red-200"> {userData?.fullName}</h4>
+      <h4 className="text-red-200"> {user?.fullName}</h4>
+      {!histories && status === "pending" && <p>Loading...</p>}
+      {histories &&
+        histories?.length > 0 &&
+        status === "success" &&
+        histories?.map((history) => (
+          <section key={history?.id} className="">
+            <div className="font-semibold my-2 text-base flex gap-4 text-black ">
+              <h2>{history?.inputData}</h2>
+              <p> = {history?.result}</p>
+            </div>
+            <h2>
+              {dayjs(history?.$createdAt).format("dddd, MMMM D, YYYY h:mm A")}
+            </h2>
+          </section>
+        ))}
 
-      {userHistories?.map((history) => (
-        <section key={history?.id} className="">
-          <div className="font-semibold my-2 text-base flex gap-4 text-black ">
-            <h2>{history?.attributes?.inputData}</h2>
-            <p> = {history?.attributes?.result}</p>
-          </div>
-          <h2>{history?.attributes?.createdAt}</h2>
-        </section>
-      ))}
+      {histories?.length === 0 && status === "success" && (
+        <div>
+          <p>No History Found</p>
+        </div>
+      )}
     </Dialog>
   );
 };

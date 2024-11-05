@@ -44,7 +44,6 @@ const SignUp = () => {
     if (!term) return toast.error("Terms and condition required");
     const values = {
       ...data,
-      username: data.fullName,
       term,
     };
     mutate(values);

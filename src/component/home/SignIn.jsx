@@ -133,7 +133,7 @@ const SignIn = () => {
 
   const handleErrorMessage = (error) => {
     if (error) {
-      return error.message; // Supabase error format
+      return error.message; 
     }
     return null;
   };

@@ -1,43 +1,36 @@
-import { axiosInstance } from "./axiosInstance";
+import { account, databases, ID } from "../Appwrite/Appwrite";
 
+// SignUp API
 export const signUpApi = async (values) => {
-  const res = await axiosInstance.post("/auth/local/register", values);
-  return res.data;
+  const { email, password, fullName } = values;
+  const data = await account.create(
+    "unique()",
+    email,
+    password,
+    (name = fullName)
+  );
+
+  if (data.$id) {
+    const res = await databases.createDocument(
+      "userId",
+      "6729bac5000072a5128a",
+      ID.unique(),
+      {
+        ...values,
+        userId: data?.$id,
+      }
+    );
+    return res;
+  }
 };
+
+// Sign In
 export const signInApi = async (values) => {
-  const payload = {
-    password: values.password,
-    identifier: values.email,
-  };
-  const res = await axiosInstance.post("auth/local", payload);
-  return res.data;
+  const { email, password } = values;
+  // const loggedInUser = await Database.get();
+  return await account.createEmailPasswordSession(email, password);
 };
 
-// import { supabase } from "../supabase/supabase";
-
-// export const signUpApi = async (values) => {
-//   const { email, password, username } = values; // Destructure to get email and password
-//   const { data, error } = await supabase.auth.signUp({
-//     email,
-//     password,
-//     options: {
-//       data: { username }, // Optionally save additional user data
-//     },
-//   });
-
-//   if (error) console.error("Error fetching user:", error.message);
-//   return data;
-// };
-
-// export const signInApi = async (email, password) => {
-//   const { data, error } = await supabase.auth.signInWithPassword({
-//     email,
-//     password,
-//   });
-
-//   if (error) {
-//     throw new Error(error.message);
-//   }
-
-//   return data;
-// };
+export const logout = async () => {
+  return await account.deleteSession("current");
+};
