@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+
 import { account, databases } from "../Appwrite/Appwrite";
 import { Query } from "appwrite";
 

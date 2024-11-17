@@ -1,15 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
-import { logout } from "../services/signUp";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/Auth";
 
 export const useLogout = () => {
+  const { logout } = useAuthStore();
   const navigate = useNavigate();
   const { isPending, mutate } = useMutation({
     mutationFn: logout,
     onSuccess: () => {
       toast.success("User Logout");
-      localStorage.clear();
       navigate("/"); // Navigate to calculator
     },
     onError: (error) => {
